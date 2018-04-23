@@ -14,7 +14,7 @@ public class Damage : MonoBehaviour {
         if (other.gameObject.tag == "Player")
         {
             //playera = transform.gameObject.name ("Player");
-            player.GetComponent<Charecter_Controller>().health -= Ddelt;
+            player.GetComponent<Charecter_Controller>().changehealth(-Ddelt);
         }
     }
 }

@@ -23,6 +23,8 @@ public class Charecter_Controller : MonoBehaviour {
     //UI
     public Text healthTxt;
     public Slider StanimaSlider;
+    public GameObject DialogeBox;
+    public Image damageEffect;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +33,7 @@ public class Charecter_Controller : MonoBehaviour {
         movementSpeed = MaxSpeed;
         StanimaSlider.maxValue = MaxStanima;
         StanimaSlider.minValue = MinStanima;
+        isBlocked = true;
     }
 	
 	// Update is called once per frame
@@ -42,6 +45,7 @@ public class Charecter_Controller : MonoBehaviour {
         healthTxt.text = ("Health" + health);
         StanimaSlider.value = stanima;
 
+ 
     }
 
     void Movement()
@@ -73,6 +77,11 @@ public class Charecter_Controller : MonoBehaviour {
             stanima = MaxStanima;
         }
 
+    }
+    public void changehealth(float amount)
+    {
+        health += amount;
+        damageEffect.GetComponent<FadeImage>().transitioning = true;
     }
 
     void Death()
@@ -125,7 +134,11 @@ public class Charecter_Controller : MonoBehaviour {
         }
     }
 
-
+    public void StartLvl()
+    {
+        isBlocked = false;
+        DialogeBox.SetActive(false);
+    }
 
 
 }
