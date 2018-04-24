@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Models/Textures/Planks.meta
 guid: 0d2b47a857b5bc04582da0694c9d65a2
 folderAsset: yes
 timeCreated: 1524534481
+=======
+guid: 9db9bd3e452d3d84b9a2d465a56c7447
+folderAsset: yes
+timeCreated: 1524533553
+>>>>>>> d756631d8b57f08a78f6822835add72c10a51fe7:Assets/Scripts.meta
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
