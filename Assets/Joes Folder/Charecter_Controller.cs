@@ -28,15 +28,21 @@ public class Charecter_Controller : MonoBehaviour {
     public GameObject DialogeBox;
     public Image damageEffect;
 
+    //Animations
+    Animator anim;
+
 
 	// Use this for initialization
 	void Start () {
         controller = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+
         stanima = MaxStanima;
         movementSpeed = MaxSpeed;
         StanimaSlider.maxValue = MaxStanima;
         StanimaSlider.minValue = MinStanima;
+
         isBlocked = true;
     }
 	
@@ -60,15 +66,20 @@ public class Charecter_Controller : MonoBehaviour {
         GroundedCheck();
 
         if (!isGrounded)
+        {
             controller.SimpleMove(Physics.gravity * Time.deltaTime);
+            print(isGrounded);
+        }
 
         Vector3 velocity = new Vector3();
         //Make the player move Foaward
         if(isBlocked == false)
         {
+            anim.SetBool("isWalking", true);
             //transform.position += transform.forward * Time.deltaTime * movementSpeed;
             //controller.SimpleMove(transform.forward * movementSpeed * Time.deltaTime);
             velocity += transform.forward * movementSpeed;
+            
         }
 
         //Makes the player 'Jump'
@@ -86,11 +97,13 @@ public class Charecter_Controller : MonoBehaviour {
         //Sprint & Stanima
         if (Input.GetKeyDown(KeyCode.LeftShift) & stanima >= 3)
         {
-            movementSpeed = MaxSpeed * 1.5f;
+            anim.SetBool("isRunning", true);
+            movementSpeed = MaxSpeed * 2f;
             StanimaTim = true;
         }
         if (Input.GetKeyUp(KeyCode.LeftShift) || stanima <= MinStanima)
         {
+            anim.SetBool("isRunning", false);
             movementSpeed = MaxSpeed;
             StanimaTim = false;
             stanima = MaxStanima;
@@ -120,7 +133,7 @@ public class Charecter_Controller : MonoBehaviour {
 
     }
 
-  /*  private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Floor")
         {
@@ -136,14 +149,15 @@ public class Charecter_Controller : MonoBehaviour {
             isGrounded = false;
             print("NO");
         }
-    }
-    */
+    }*/
+    
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Obsticle")
         {
-             isBlocked = true;
+            anim.SetBool("isWalking", false);
+            isBlocked = true;
             print("blocked");
         }
     }
@@ -166,6 +180,8 @@ public class Charecter_Controller : MonoBehaviour {
     void GroundedCheck()
     {
         isGrounded = Physics.Raycast(transform.position - transform.up * controller.height / 2.0f, -Vector3.up, 0.25f);
+        Debug.DrawRay(transform.position, -Vector3.up, Color.green, 0.25f);
+        
     }
 
 }
