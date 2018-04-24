@@ -23,7 +23,7 @@ public class Turret : MonoBehaviour {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),out hit) && gunTimmer >= 3)
         {
             print("RayCast hit: " + hit.collider.name);
-            Instantiate(bulletEffect, gameObject.transform.position, Quaternion.identity);
+            Instantiate(bulletEffect, gameObject.transform.position, gameObject.transform.rotation);
             gunTimmer = 0f;
 
         }
