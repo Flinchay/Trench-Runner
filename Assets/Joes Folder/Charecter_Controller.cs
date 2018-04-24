@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Animations;
 
 public class Charecter_Controller : MonoBehaviour {
     //speed
@@ -9,7 +10,7 @@ public class Charecter_Controller : MonoBehaviour {
     public float MaxSpeed;
     //Jump & health
     public float jumpHeight;
-    public float health = 100f;
+    private float health = 100f;
     //stanima
     public float stanima;
     public float MaxStanima;
@@ -19,6 +20,7 @@ public class Charecter_Controller : MonoBehaviour {
     bool isBlocked;
     bool StanimaTim;
 
+    public CharacterController controller;
     Rigidbody rb;
     //UI
     public Text healthTxt;
@@ -26,8 +28,10 @@ public class Charecter_Controller : MonoBehaviour {
     public GameObject DialogeBox;
     public Image damageEffect;
 
+
 	// Use this for initialization
 	void Start () {
+        controller = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         stanima = MaxStanima;
         movementSpeed = MaxSpeed;
@@ -38,6 +42,8 @@ public class Charecter_Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        GroundedCheck();
         Movement();
         Death();
         StanimaTimer();
@@ -50,19 +56,32 @@ public class Charecter_Controller : MonoBehaviour {
 
     void Movement()
     {
+
+        GroundedCheck();
+
+        if (!isGrounded)
+            controller.SimpleMove(Physics.gravity * Time.deltaTime);
+
+        Vector3 velocity = new Vector3();
         //Make the player move Foaward
         if(isBlocked == false)
         {
-            transform.position += transform.forward * Time.deltaTime * movementSpeed;
+            //transform.position += transform.forward * Time.deltaTime * movementSpeed;
+            //controller.SimpleMove(transform.forward * movementSpeed * Time.deltaTime);
+            velocity += transform.forward * movementSpeed;
         }
 
         //Makes the player 'Jump'
         if (Input.GetKeyDown(KeyCode.Space) & isGrounded)
         {
-            //transform.position += transform.up * jumpHeight * Time.deltaTime;
-            rb.AddForce(transform.up * jumpHeight );
+            //controller.SimpleMove(transform.up * jumpHeight);
+            velocity += transform.up * jumpHeight;
+            //rb.AddForce(transform.up * jumpHeight );
             print("Jump");
         }
+
+        controller.Move(velocity * Time.deltaTime);
+
 
         //Sprint & Stanima
         if (Input.GetKeyDown(KeyCode.LeftShift) & stanima >= 3)
@@ -101,11 +120,12 @@ public class Charecter_Controller : MonoBehaviour {
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+  /*  private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Floor")
         {
             isGrounded = true;
+            print("YES");
         }
 
     }
@@ -114,15 +134,17 @@ public class Charecter_Controller : MonoBehaviour {
         if (collision.gameObject.tag == "Floor")
         {
             isGrounded = false;
+            print("NO");
         }
-
     }
+    */
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Obsticle")
         {
              isBlocked = true;
+            print("blocked");
         }
     }
 
@@ -131,6 +153,7 @@ public class Charecter_Controller : MonoBehaviour {
         if(other.gameObject.tag == "Obsticle")
         {
             isBlocked = false;
+            print("NotBLocked");
         }
     }
 
@@ -140,5 +163,9 @@ public class Charecter_Controller : MonoBehaviour {
         DialogeBox.SetActive(false);
     }
 
+    void GroundedCheck()
+    {
+        isGrounded = Physics.Raycast(transform.position - transform.up * controller.height / 2.0f, -Vector3.up, 0.25f);
+    }
 
 }
