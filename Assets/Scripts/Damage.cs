@@ -5,7 +5,6 @@ using UnityEngine;
 public class Damage : MonoBehaviour {
 
     public float Ddelt;
-    public GameObject player;
 
 
     private void OnTriggerEnter(Collider other)
@@ -13,7 +12,7 @@ public class Damage : MonoBehaviour {
         //Deals Damage to the player
         if (other.gameObject.tag == "Player")
         {
-            //playera = transform.gameObject.name ("Player");
+            GameObject player = other.gameObject;
             player.GetComponent<Charecter_Controller>().changehealth(-Ddelt);
         }
     }

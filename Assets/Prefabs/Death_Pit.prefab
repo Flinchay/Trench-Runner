@@ -9,45 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1536922442390102}
+  m_RootGameObject: {fileID: 1497410166562802}
   m_IsPrefabParent: 1
---- !u!1 &1536922442390102
+--- !u!1 &1497410166562802
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4715569230744058}
-  - component: {fileID: 33775028095794046}
-  - component: {fileID: 23662363953406554}
-  - component: {fileID: 95019633427587106}
+  - component: {fileID: 4852136360011998}
+  - component: {fileID: 33543674405553622}
+  - component: {fileID: 23488227388332260}
+  - component: {fileID: 95871248950344638}
+  - component: {fileID: 114293873949266940}
+  - component: {fileID: 65092393065270196}
   m_Layer: 0
-  m_Name: Death_Pit (3)
+  m_Name: Death_Pit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4715569230744058
+--- !u!4 &4852136360011998
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1536922442390102}
+  m_GameObject: {fileID: 1497410166562802}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.26756, y: 1.6355526, z: 21.870644}
+  m_LocalPosition: {x: -8.03, y: -2.053, z: -2.242}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23662363953406554
+--- !u!23 &23488227388332260
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1536922442390102}
+  m_GameObject: {fileID: 1497410166562802}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -56,8 +58,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 74572e22525bc0e4babb1da2b71e4a52, type: 2}
-  - {fileID: 2100000, guid: ba1f6a6d401bbf44aaccf0d2e6e3ae33, type: 2}
+  - {fileID: 2100000, guid: 63ad7fdf47757a14789a60cc1f2d4688, type: 2}
+  - {fileID: 2100000, guid: 63ad7fdf47757a14789a60cc1f2d4688, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,20 +79,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33775028095794046
+--- !u!33 &33543674405553622
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1536922442390102}
+  m_GameObject: {fileID: 1497410166562802}
   m_Mesh: {fileID: 4300000, guid: 48343a76e1c9b5548bcd051b690716ce, type: 3}
---- !u!95 &95019633427587106
+--- !u!65 &65092393065270196
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1497410166562802}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2000002, y: 2.0057015, z: 1.4344025}
+  m_Center: {x: 0.6000001, y: 1.0028508, z: 0.5796554}
+--- !u!95 &95871248950344638
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1536922442390102}
+  m_GameObject: {fileID: 1497410166562802}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 48343a76e1c9b5548bcd051b690716ce, type: 3}
   m_Controller: {fileID: 0}
@@ -101,3 +115,16 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114293873949266940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1497410166562802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56681655fc92b5449cf557615110f07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ddelt: 100
+  player: {fileID: 0}
